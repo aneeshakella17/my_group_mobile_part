@@ -18,7 +18,6 @@ public class Group {
         this.department = department;
         this.course_no = course_no;
         this.prof = prof;
-        this.active = true;
     }
 
     public String getName(){

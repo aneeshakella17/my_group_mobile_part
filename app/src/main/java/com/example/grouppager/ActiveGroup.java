@@ -35,6 +35,7 @@ public class ActiveGroup extends Fragment {
     private String mParam1;
     private String mParam2;
     DatabaseReference active_group_database;
+    DatabaseReference closed_group_database;
 
     private OnFragmentInteractionListener mListener;
 
@@ -70,6 +71,8 @@ public class ActiveGroup extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         active_group_database = FirebaseDatabase.getInstance().getReference().child("Active Groups");
+        closed_group_database = FirebaseDatabase.getInstance().getReference().child("Closed Groups");
+
     }
 
 
