@@ -16,7 +16,7 @@
             android:id="@+id/group_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="50dp"
             android:gravity="left"
             android:text="Group Name:"
@@ -26,7 +26,7 @@
             android:id="@+id/group_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:layout_marginLeft="50dp"
             android:text="Awesome Group"
@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Type"
+            android:layout_marginTop="20dp"
             android:textSize="20dp" />
 
         <EditText
@@ -53,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:gravity="right"
+            android:layout_marginTop="20dp"
             android:text="Awesome Group"
             android:textSize="20dp" />
 
@@ -133,9 +135,9 @@
         android:layout_height="wrap_content"
         android:gravity="top|left"
         android:inputType="textMultiLine"
-        android:lines="2"
+        android:lines="5"
         android:maxLines="10"
-        android:minLines="6"
+        android:minLines="5"
         android:scrollbars="vertical"
         android:text="Description" />
 
