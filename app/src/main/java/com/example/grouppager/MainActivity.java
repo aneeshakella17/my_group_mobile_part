@@ -33,14 +33,6 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
         FirebaseApp.initializeApp(this);
-
-
-
-//        FirebaseListOptions<Group> options = new FirebaseListOptions.Builder<Group>()
-//                .setLayout(android.R.layout.simple_list_item_1)//Note: The guide doesn't mention this method, without it an exception is thrown that the layout has to be set.
-//                .setQuery(active_group_database, Group.class)
-//                .build();
-
     }
 
 

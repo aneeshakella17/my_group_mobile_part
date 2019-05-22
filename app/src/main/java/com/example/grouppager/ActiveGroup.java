@@ -69,11 +69,8 @@ public class ActiveGroup extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+        active_group_database = FirebaseDatabase.getInstance().getReference().child("Active Groups");
     }
-
-
-
 
 
     @Override
@@ -82,7 +79,6 @@ public class ActiveGroup extends Fragment {
         // Inflate the layout for this fragment
         LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.fragment_active_group, container, false);
         ListView active_list = (ListView) ll.findViewById(R.id.active_list_view);
-        active_group_database = FirebaseDatabase.getInstance().getReference().child("Active Groups");
         active_list.setAdapter(new FirebaseListAdapter<Group>(getActivity(), Group.class, android.R.layout.simple_list_item_1, active_group_database) {// Populate view as needed
             @Override
             protected void populateView(View view, Group g, int position) {

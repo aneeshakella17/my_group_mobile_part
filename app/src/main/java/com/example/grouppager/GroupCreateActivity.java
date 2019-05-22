@@ -1,5 +1,6 @@
 package com.example.grouppager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,14 @@ public class GroupCreateActivity extends AppCompatActivity {
         String department = ((EditText) findViewById(R.id.department_input)).getText().toString();
         Group g = new Group(group_name, type, department, course_no, professor);
         reff.push().setValue(g);
+        Intent myIntent = new Intent(this, MainActivity.class);
+        startActivity(myIntent);
     }
 
+
+    public void cancel(View view){
+        Intent myIntent = new Intent(this, MainActivity.class);
+        startActivity(myIntent);
+    }
 
 }

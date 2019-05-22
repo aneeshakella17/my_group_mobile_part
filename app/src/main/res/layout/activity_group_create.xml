@@ -151,6 +151,7 @@
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:background="#0AB6F7"
+            android:onClick = "cancel"
             android:text="Cancel" />
 
         <Button
