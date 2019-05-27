@@ -9,6 +9,8 @@ public class Group {
     String course_no;
     String prof;
     boolean active;
+    String key;
+
 
     public Group(){}
 
@@ -18,9 +20,14 @@ public class Group {
         this.department = department;
         this.course_no = course_no;
         this.prof = prof;
+        this.key = "";
     }
 
     public String getName(){
         return name;
     }
+    public String getKey(){return key;}
+    public void setKey(final String key){this.key = key;}
+
+
 }

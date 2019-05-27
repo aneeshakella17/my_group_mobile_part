@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 //import com.firebase.ui.database.FirebaseListOptions;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -32,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-        FirebaseApp.initializeApp(this);
     }
-
 
 
     public void addGroup(View view){

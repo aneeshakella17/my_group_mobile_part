@@ -1,5 +1,6 @@
 package com.example.grouppager;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,13 +9,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -25,6 +39,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Use the {@link ActiveGroup#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class ActiveGroup extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,8 +51,9 @@ public class ActiveGroup extends Fragment {
     private String mParam2;
     DatabaseReference active_group_database;
     DatabaseReference closed_group_database;
-
     private OnFragmentInteractionListener mListener;
+    ArrayList<String> active_keys;
+    FirebaseFirestore db;
 
     public ActiveGroup() {
         // Required empty public constructor
@@ -70,24 +86,39 @@ public class ActiveGroup extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        active_group_database = FirebaseDatabase.getInstance().getReference().child("Active Groups");
-        closed_group_database = FirebaseDatabase.getInstance().getReference().child("Closed Groups");
-
+        db = FirebaseFirestore.getInstance();
+//        db = FirebaseDatabase.getInstance().getReference();
+//        closed_group_database = FirebaseDatabase.getInstance().getReference().child("Closed Groups");
+        active_keys = new ArrayList<>();
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.fragment_active_group, container, false);
-        ListView active_list = (ListView) ll.findViewById(R.id.active_list_view);
-        active_list.setAdapter(new FirebaseListAdapter<Group>(getActivity(), Group.class, android.R.layout.simple_list_item_1, active_group_database) {// Populate view as needed
-            @Override
-            protected void populateView(View view, Group g, int position) {
-                ((TextView) view.findViewById(android.R.id.text1)).setText(g.getName());
+        final ListView active_list = (ListView) ll.findViewById(R.id.active_list_view);
+        db.collection("Active Groups").addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                active_keys.clear();
+                ArrayList<String> temp = new ArrayList<>();
+                for (DocumentSnapshot snapshot : documentSnapshots) {
+                    if(snapshot.get("name") != null) {
+                        active_keys.add((String) snapshot.get("name"));
+                    }
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_selectable_list_item, active_keys);
+                adapter.notifyDataSetChanged();
+                active_list.setAdapter(adapter);
             }
         });
+
+
+
+
 
         return ll;
     }
